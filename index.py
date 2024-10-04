@@ -154,7 +154,12 @@ def fetch_postmates_codes(subreddit, last_checked):
 
 def main():
     print("=== Getting last_checked ===")
-    last_checked = float(client.get("freegamedealsdiscord:last_checked"))
+    last_checked = 0
+    if os.path.exists("last_checked.txt"):
+        with open("last_checked.txt") as f:
+            last_checked = float(f.readline())
+    else:
+        last_checked = float(client.get("freegamedealsdiscord:last_checked"))
     new_last_checked = datetime.datetime.utcnow().timestamp() // 1  # Floor Division
 
     print("\tlast_checked:", last_checked)
@@ -167,8 +172,8 @@ def main():
     post_to_discord(os.environ.get("OSNN_DISCORD_WEBHOOK"), game_deals)
 
     # Set the new time after execution is done
-    if Redis:
-        client.set("freegamedealsdiscord:last_checked", new_last_checked)
+    with open("last_checked.txt", "w") as f:
+        f.write(str(new_last_checked))
 
 
 if __name__ == "__main__":

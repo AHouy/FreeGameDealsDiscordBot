@@ -31,6 +31,9 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - uses: actions/cache@v4
+        with:
+          path: last_checked.txt
       # Runs a single command using the runners shell
       - name: Fetch
         env:
