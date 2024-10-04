@@ -11,13 +11,6 @@ load_dotenv()
 
 DISCORD_USER_ID = "128739147115397120"
 
-try:
-    from redis import Redis
-    client = Redis.from_url(os.environ.get("REDIS_URL"), decode_responses=True)
-except (ImportError, ValueError):
-    Redis = None
-    client = {"freegamedealsdiscord:last_checked": 0}
-
 
 # ===============================================================================
 # HELPER FUNCTIONS
@@ -159,7 +152,7 @@ def main():
         with open("last_checked.txt") as f:
             last_checked = float(f.readline())
     else:
-        last_checked = float(client.get("freegamedealsdiscord:last_checked"))
+        last_checked = datetime.datetime.utcnow().timestamp() // 1
     new_last_checked = datetime.datetime.utcnow().timestamp() // 1  # Floor Division
 
     print("\tlast_checked:", last_checked)
