@@ -34,6 +34,7 @@ jobs:
       - uses: actions/cache@v4
         with:
           path: last_checked.txt
+          key: last_checked
       # Runs a single command using the runners shell
       - name: Fetch
         env:
