@@ -34,11 +34,8 @@ jobs:
       - uses: dawidd6/action-download-artifact@v6
         with:
           name: last_checked
-          path: last_checked.txt
           search_artifacts: true
       # Runs a single command using the runners shell
-      - name: List Directory
-        run: ls -al
       - name: Fetch
         env:
           REDIS_URL: ${{ secrets.REDIS_URL }}
