@@ -44,4 +44,8 @@ jobs:
           OSNN_DISCORD_WEBHOOK: ${{ secrets.OSNN_DISCORD_WEBHOOK }}
           VISA_DISCORD_WEBHOOK: ${{ secrets.VISA_DISCORD_WEBHOOK }}
         run: python index.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: last_checked
+          path: last_checked.txt
         
