@@ -35,6 +35,7 @@ jobs:
         with:
           name: last_checked
           path: last_checked.txt
+          run-id: ${{ github.event.workflow_run.id }}
       # Runs a single command using the runners shell
       - name: Fetch
         env:
